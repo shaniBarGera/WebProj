@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CG Curves</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="Slideshow/Slideshow.css">
+    <link rel="stylesheet" href="Accordion/Accordion.css">
+    <link rel="stylesheet" href="Bezier/main.css">
+    <script src="Lagrange/Lagrange.js" type="text/javascript"></script>\
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <p class="cgtitle">CG Curves</p>
+        </header>
+
+        <!--Bezier Curves-->
+        <button class="accordion"><a>Bezier Curves</a></button>
+        <div class="panel">
+            <!--main display-->
+            <div class="centered">
+                <div id="controls">
+                    <!--top controls-->
+                    <span>
+                        <input type="radio" id="linear-radio" name="order-group" value="2" />
+                        <label for="linear-radio">Linear</label>
+
+                        <input type="radio" id="quadratic-radio" name="order-group" value="3" />
+                        <label for="quadratic-radio">Quadratic</label>
+
+                        <input type="radio" id="cubic-radio" name="order-group" value="4" checked />
+                        <label for="quadratic-radio">Cubic</label>
+
+                        <input type="radio" id="custom-radio" name="order-group" value="custom" />
+                        <label for="custom-radio">Higher-order</label>
+                        <input type="number" id="custom-order" size="1" min="5" value="4" />
+
+                        <label>Number of Steps</label>
+                        <input type="number" id="stepControl" min="1" max="1000" value="16" />
+                    </span>
+                    <!--top controls-->
+
+                    <span id="sliderControl">
+                        <input type="range" id="tSlider" min="0" max="100" value="0" class="slider" />
+                        <label id="tValue">t = 0.0</label>
+                    </span>
+                </div><!--controls-->
+                <canvas id="curves" class="centered" width="800" height="600">
+                    Browser does not support canvas
+                </canvas>
+            </div>
+            <!--main display-->
+            <!--graph display-->
+            <script src="Bezier/app.js"></script>
+            <script src="Bezier/bezier.js"></script>
+            <script src="Bezier/drawing.js"></script>
+            <script>
+
+                window.onload = function () {
+                new App().run(this.window);
+                };
+            </script>
+            <!--graph display-->
+        </div><p></p>
+        <!--Bezier Curves-->
+
+        <!--Cubic Lagrange-->
+        <button class="accordion"><a>Cubic Lagrange</a></button>
+        <div class="panel">
+            <div class="slideshow-container">
+
+                    <div class="mySlides fade">
+                        <img src="Slideshow/img1.jpg" style="width:100%">
+                    </div>
+
+                    <div class="mySlides fade">
+                        <!--main display-->
+                        <div class="centered">
+                            <div id="controls">
+                                <!--top controls-->
+                                <span>
+                                    <input type="radio" id="linear-radio" name="order-group" value="2" />
+                                    <label for="linear-radio">Linear</label>
+
+                                    <input type="radio" id="quadratic-radio" name="order-group" value="3" />
+                                    <label for="quadratic-radio">Quadratic</label>
+
+                                    <input type="radio" id="cubic-radio" name="order-group" value="4" checked />
+                                    <label for="quadratic-radio">Cubic</label>
+
+                                    <input type="radio" id="custom-radio" name="order-group" value="custom" />
+                                    <label for="custom-radio">Higher-order</label>
+                                    <input type="number" id="custom-order" size="1" min="5" value="4" />
+
+                                    <label>Number of Steps</label>
+                                    <input type="number" id="stepControl" min="1" max="1000" value="16" />
+                                </span>
+                                <!--top controls-->
+
+                                <span id="sliderControl">
+                                    <input type="range" id="tSlider" min="0" max="100" value="0" class="slider" />
+                                    <label id="tValue">t = 0.0</label>
+                                </span>
+                            </div><!--controls-->
+                            <canvas id="curves" class="centered" width="800" height="600">
+                                Browser does not support canvas
+                            </canvas>
+                        </div>
+                        <!--main display-->
+                        <!--graph display-->
+                        <script src="Bezier/app.js"></script>
+                        <script src="Bezier/bezier.js"></script>
+                        <script src="Bezier/drawing.js"></script>
+                        <script>
+
+                            window.onload = function () {
+                            new App().run(this.window);
+                            };
+                        </script>
+                        <!--graph display-->
+                    </div>
+
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div><br>
+
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+
+            <script src="Slideshow/Slideshow.js" type="text/javascript"></script>
+        </div><p></p>
+        <!--Cubic Lagrange-->
+
+        <!--Cubic Hermite-->
+        <button class="accordion"><a>Cubic Hermite</a></button>
+        <div class="panel">
+            <p>Hello World!</p>
+        </div><p></p>
+        <!--Cubic Hermite-->
+
+        <script src="Accordion/Accordion.js" type="text/javascript"></script>
+
+    </div><!--container-->
+
+    <footer>
+        <f>Made by: Shani Bar-Gera, Vitaly Eliash</f>
+    </footer>
+
+</body>
+</html>
