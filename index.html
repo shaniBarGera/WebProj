@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="Accordion/Accordion.css">
     <link rel="stylesheet" href="Bezier/main.css">
     <script src="Lagrange/Lagrange.js" type="text/javascript"></script>\
+    <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+    <title>test</title>
+    <script type="text/javascript" src="BSpline/BSpline.js"></script>
+    <script type="text/javascript" src="BSpline/main.js"></script>
 
 </head>
 
@@ -19,7 +23,6 @@
             <p class="cgtitle">CG Curves</p>
         </header>
         <section>
-
             <!--Bezier Curves-->
             <button class="accordion"><a>Bezier Curves</a></button>
             <div class="panel">
@@ -65,7 +68,7 @@
                 <script>
 
                     window.onload = function () {
-                        new App().run(this.window);
+                    new App().run(this.window);
                     };
                 </script>
                 <!--graph display-->
@@ -73,32 +76,7 @@
 
             </div><p></p>
             <!--Bezier Curves-->
-            <!--Cubic Lagrange-->
-            <button class="accordion"><a>Cubic Lagrange</a></button>
-            <div class="panel">
-                <div class="slideshow-container">
 
-                    <div class="mySlides fade">
-                        <img src="Slideshow/img1.jpg" style="width:100%">
-                    </div>
-
-                    <div class="mySlides fade">
-                        <p>hello World</p>
-
-                    </div>
-
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                </div><br>
-
-                <div style="text-align:center">
-                    <span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                </div>
-
-                <script src="Slideshow/Slideshow.js" type="text/javascript"></script>
-            </div><p></p>
-            <!--Cubic Lagrange-->
             <!--Cubic Splines-->
             <button class="accordion"><a>Cubic Splines</a></button>
             <div class="panel">
@@ -140,16 +118,16 @@
             <script>
 
                 /*
-                 Slider feedback 0.6
-                 By Ken Fyrstenberg
-                 */
+                Slider feedback 0.6
+                By Ken Fyrstenberg
+                */
                 (function () { var a = HTMLInputElement.prototype; a._LD = function () { this._DW = !0 }; a._LU = function () { this._DW = !1 }; a._LM = function (b) { var d = this, c = d.value; if (d._DW && d._OV != c) { d._LE(); d._OV = c; if (d.onchange) { setTimeout(function () { d.onchange(d._CE()) }, 7) } } }; a._LE = function () { this.dispatchEvent(this._CE()) }; a._CE = function () { var d, b = "change"; try { d = new Event(b) } catch (f) { d = document.createEvent("Event"); d.initEvent(b, !0, !0) } return d }; a.feedback = function (f) { var j = this, e = "mouse", c = "down", h = "up", i = "move"; if (j.type == "range") { if (f == j._OMD) { return } if (f) { b(e + c, j._LD); b(e + i, j._LM); b(e + h, j._LU); setTimeout(function () { j._LE(); if (j.onchange) { j.onchange(null) } }, 9) } else { g(e + c, j._LD); g(e + i, j._LM); g(e + h, j._LU) } j._OMD = f } function b(k, d) { j.addEventListener(k, d) } function g(k, d) { j.removeEventListener(k, d) } } })(); window.addEventListener("DOMContentLoaded", function () { for (var c = document.querySelectorAll("input[type=range]"), b = 0, a; a = c[b++];) { a.feedback(!0) } });
 
                 var canvas = document.getElementById('demoCanvas'),
-                    ctx = canvas.getContext("2d"),
-                    w = canvas.width,
-                    h = canvas.height,
-                    pts = [];
+                ctx = canvas.getContext("2d"),
+                w = canvas.width,
+                h = canvas.height,
+                pts = [];
 
                 ctx.translate(0.5, 0.5);
                 ctx.lineJoin = 'round';
@@ -164,95 +142,131 @@
                 document.getElementById('chkFill').addEventListener('change', drawCurveDemo, false);
 
                 /*
-                 *	Randomize points
+                *	Randomize points
                 */
                 function randomize() {
 
-                    var numOfPoints = 7; //min. 2
+                var numOfPoints = 7; //min. 2
 
-                    pts = [];
+                pts = [];
 
-                    for (var i = 0; i < numOfPoints; i++) {
-                        pts.push((w * Math.random() * 0.9 + w * 0.05) | 0,
-                            (h * Math.random() * 0.9 + h * 0.05) | 0);
-                    }
+                for (var i = 0; i < numOfPoints; i++) {
+                pts.push((w * Math.random() * 0.9 + w * 0.05) | 0,
+                (h * Math.random() * 0.9 + h * 0.05) | 0);
+                }
                 }
 
                 /*
-                 *	Collect options
-                 */
+                *	Collect options
+                */
                 function curveOptions() {
-                    this.closed = document.getElementById('chkClosed').checked;
-                    this.fill = document.getElementById('chkFill').checked;
-                    this.points = document.getElementById('chkPoints').checked;
-                    this.segments = parseFloat(document.getElementById('numSegments').value);
-                    this.tension = parseFloat(document.getElementById('numTension').value) * 0.1;
+                this.closed = document.getElementById('chkClosed').checked;
+                this.fill = document.getElementById('chkFill').checked;
+                this.points = document.getElementById('chkPoints').checked;
+                this.segments = parseFloat(document.getElementById('numSegments').value);
+                this.tension = parseFloat(document.getElementById('numTension').value) * 0.1;
 
-                    return this;
+                return this;
                 }
 
                 /*
-                 *	Draw curve with current settings and points
-                 */
+                *	Draw curve with current settings and points
+                */
                 function drawCurveDemo() {
 
-                    ctx.clearRect(0, 0, w, h);
+                ctx.clearRect(0, 0, w, h);
 
-                    // get current options
-                    var o = new curveOptions();
+                // get current options
+                var o = new curveOptions();
 
-                    document.getElementById('numSegmentsValue').innerHTML = o.segments;
-                    document.getElementById('numTensionValue').innerHTML = o.tension.toFixed(1);
+                document.getElementById('numSegmentsValue').innerHTML = o.segments;
+                document.getElementById('numTensionValue').innerHTML = o.tension.toFixed(1);
 
-                    // draw our cardinal spline
-                    ctx.beginPath();
-                    ctx.moveTo(pts[0], pts[1]);
-                    ctx.curve(pts, o.tension, o.segments, o.closed);
-                    if (o.closed && !o.fill) ctx.closePath();
-                    ctx.strokeStyle = '#6677cc';
-                    ctx.lineWidth = 3;
-                    if (o.fill) {
-                        ctx.fillStyle = '#b7b7b7';
-                        ctx.fill();
-                    }
-                    ctx.stroke();
+                // draw our cardinal spline
+                ctx.beginPath();
+                ctx.moveTo(pts[0], pts[1]);
+                ctx.curve(pts, o.tension, o.segments, o.closed);
+                if (o.closed && !o.fill) ctx.closePath();
+                ctx.strokeStyle = '#6677cc';
+                ctx.lineWidth = 3;
+                if (o.fill) {
+                ctx.fillStyle = '#b7b7b7';
+                ctx.fill();
+                }
+                ctx.stroke();
 
-                    // show original points
-                    if (o.points) {
-                        ctx.lineWidth = 1;
-                        for (var i = 0; i < pts.length; i += 2) {
-                            if (i === 0)
-                                ctx.strokeStyle = '#0f0';
-                            else if (i === pts.length - 2)
-                                ctx.strokeStyle = 'rgba(255,0,0,0.7)';
-                            else
-                                ctx.strokeStyle = 'rgba(0,0,0,0.7)';
+                // show original points
+                if (o.points) {
+                ctx.lineWidth = 1;
+                for (var i = 0; i < pts.length; i += 2) {
+                if (i === 0)
+                ctx.strokeStyle = '#0f0';
+                else if (i === pts.length - 2)
+                ctx.strokeStyle = 'rgba(255,0,0,0.7)';
+                else
+                ctx.strokeStyle = 'rgba(0,0,0,0.7)';
 
-                            ctx.strokeRect(pts[i] - 2, pts[i + 1] - 2, 4, 4);
-                        }
-                    }
+                ctx.strokeRect(pts[i] - 2, pts[i + 1] - 2, 4, 4);
+                }
+                }
                 }
 
             </script>
-
-
             <!--Cubic Splines-->
+
             <!--B-Spline-->
             <button class="accordion"><a>B Spline</a></button>
             <div class="panel">
-                <p>Hello Space!</p>
-
-
-
-
+                <p>Click the canvas below to add points.</p>
+                <form name="fm">
+                    BSpline degree:
+                    <select name="degree" onchange="redraw();">
+                        <option value="2">2</option>
+                        <option value="3" selected>3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    &nbsp;
+                    <input type="button" onClick="ptsClear();" value="Clear All Points">
+                </form>
+                <canvas id="canvas1" width="700" height="400" style="border: solid 5px;"></canvas><br>
+                <div class="space"></div>
             </div><p></p>
             <!--B-Spline-->
+
             <!--Cubic Hermite-->
             <button class="accordion"><a>Cubic Hermite</a></button>
             <div class="panel">
-                <p>Hello Space!</p>
+                <p>Hello World</p>
             </div><p></p>
             <!--Cubic Hermite-->
+
+            <!--Slideshow-->
+            <button class="accordion"><a>Slideshow</a></button>
+            <div class="panel">
+                <div class="slideshow-container">
+
+                    <div class="mySlides fade">
+                        <img src="Slideshow/img1.jpg" style="width:100%">
+                    </div>
+
+                    <div class="mySlides fade">
+                        <p>hello World</p>
+
+                    </div>
+
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div><br>
+
+                <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                </div>
+
+                <script src="Slideshow/Slideshow.js" type="text/javascript"></script>
+            </div><p></p>
+            <!--Slideshow-->
 
             <script src="Accordion/Accordion.js" type="text/javascript"></script>
 
